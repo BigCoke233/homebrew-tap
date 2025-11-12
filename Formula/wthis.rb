@@ -9,12 +9,10 @@ class Wthis < Formula
   depends_on "go" => :build
 
   def install
-    # Compile the binary
-    system "go", "build", *std_go_args(ldflags: "-s -w"), "./cmd/wthis"
+    system "go", "build", *std_go_args(ldflags: "-s -w")
   end
 
   test do
-    # Verify that the binary runs and outputs expected info
     output = shell_output("#{bin}/wthis --version 2>&1")
     assert_match "0.1.0", output
   end
