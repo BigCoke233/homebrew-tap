@@ -1,0 +1,41 @@
+name: Auto bump Homebrew formula
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tap repo
+        uses: actions/checkout@v4
+
+      - name: Set up Homebrew
+        run: |
+          brew update
+          brew tap bigcoke233/tap .
+
+      - name: Get release info
+        id: release
+        run: |
+          echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo "url=https://github.com/BigCoke233/wthis/archive/refs/tags/${GITHUB_REF#refs/tags/}.tar.gz" >> $GITHUB_ENV
+
+      - name: Get checksum
+        run: |
+          curl -L "$url" -o source.tar.gz
+          echo "sha256=$(shasum -a 256 source.tar.gz | cut -d' ' -f1)" >> $GITHUB_ENV
+
+      - name: Update formula
+        run: |
+          sed -i "s|url \".*\"|url \"$url\"|" Formula/wthis.rb
+          sed -i "s|sha256 \".*\"|sha256 \"$sha256\"|" Formula/wthis.rb
+          sed -i "s|version \".*\"|version \"$version\"|" Formula/wthis.rb
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore: bump wthis to $version"
+          git push
