@@ -1,5 +1,5 @@
 class Wthis < Formula
-  desc "🍻 What the heck is in my Homebrew list?"
+  desc "What the heck is in my Homebrew list?"
   homepage "https://github.com/BigCoke233/wthis"
   url "https://github.com/BigCoke233/wthis/archive/refs/tags/v0.1.0.tar.gz"
   sha256 "8bd886cdd9ac564441459db6fff3358f69442bf2fb0ea587c496c63ac5442242"
