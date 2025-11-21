@@ -2,7 +2,7 @@ class Wthis < Formula
   desc "What the heck is in my Homebrew list?"
   homepage "https://github.com/BigCoke233/wthis"
   url "https://github.com/BigCoke233/wthis/archive/refs/tags/v0.1.1.tar.gz"
-  sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  sha256 "485261fd3490c1a24e2b6ac47bc03bbf108ca02dacf9a4763af46649aa182f9b"
   license "MIT"
   head "https://github.com/BigCoke233/wthis.git", branch: "main"
 
